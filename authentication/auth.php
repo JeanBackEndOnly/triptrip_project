@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             if (empty($errors)) {
                 $newHashed = password_hash($_POST["password"], PASSWORD_BCRYPT);
-                $user_role = "USER";
+                $user_role = "PARENT";
                 $query = "INSERT INTO users (firstname, middlename, lastname, suffix, user_role, email, username, password) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($query);
@@ -306,6 +306,53 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo json_encode(["status" => "error", "message" => "Database error: " . $e->getMessage()]);
             header("Location: ../src/UI-Student/index.php?page=contents/settings&CurrentPasswoed=failedasdasdasd");
                 exit;
+        }
+    }
+    if (isset($_POST['LogoutAdmin']) && $_POST['LogoutAdmin'] === 'true') {
+        $adminID = $_POST["adminID"];
+        try {
+            $query = "INSERT INTO admin_history (admin_id, login_time) VALUES ('$adminID', NOW());";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            header('Location: ../index.php');
+            
+        } catch (PDOException $e) {
+            die('Query Failed: ' . $e->getMessage());
+        }
+    }
+    if (isset($_POST['adminAccReg']) && $_POST['adminAccReg'] === 'true') {
+        $lastName = $_POST["lastName"];
+        $firstName = $_POST["firstName"];
+        $middleName = $_POST["middleName"];
+        $suffix = $_POST["suffix"] ?? '';
+        $user_role = $_POST["user_role"];
+        $gender = $_POST["gender"];
+        $email = $_POST["email"];
+        $contact = $_POST["contact"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $cpassword = $_POST["cpassword"];
+        try {
+            $stmt = $pdo->prepare("SELECT username FROM users WHERE username = '$username';"); $stmt->execute();
+            $usernameTaken = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if($usernameTaken){
+                header('Location: ../src/UI-Admin/index.php?page=contents/users&username=taken');
+                die();
+            }
+
+            $hasedPassword = password_hash($password, PASSWORD_BCRYPT);
+            $query = "INSERT INTO users (firstname, middlename, lastname, suffix, email, username, password, user_role) 
+                VALUES ('$firstName', '$middleName', '$lastName', '$suffix', '$email', '$username', '$hasedPassword', '$user_role')";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+
+            header('Location: ../src/UI-Admin/index.php?page=contents/users&registration=success');
+            die();
+
+        } catch (PDOException $e) {
+            die('Query Failed: ' . $e->getMessage());
         }
     }
     unset($_SESSION['csrf_token']);

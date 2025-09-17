@@ -86,5 +86,31 @@ class Action
         }
     }
 
+    function admin_register(){
+        $lastName = $_POST["lastName"];
+        $firstName = $_POST["firstName"];
+        $middleName = $_POST["middleName"];
+        $suffix = $_POST["suffix"] ?? '';
+        $user_role = $_POST["user_role"];
+        $gender = $_POST["gender"];
+        $email = $_POST["email"];
+        $contact = $_POST["contact"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $cpassword = $_POST["cpassword"];
+
+        try {
+            return json_encode([
+                    'status' => 1,
+                    'message' => 'success po!'
+            ]);
+        } catch (PDOException $e) {
+            return json_encode([
+                'status' => 0,
+                'message' => 'An error Occured: ' . $e->getMessage()
+            ]);
+        }
+    }
+
     
 }

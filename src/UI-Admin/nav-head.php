@@ -19,7 +19,7 @@ $user_id = $_SESSION['admin_id'];
       </div>
       <div class="row d-flex flex-row col-md-12 col-12 ps-3 transformMedia">
         <img src="../../assets/image/users.png" alt="" style="width: 70px; height: auto; border-radius: 50%;">
-        <h4 class="card-title text-black text-start p-0 m-0 w-75 d-flex align-items-center">TEMPLATE SYSTEM</h4>
+        <h4 class="card-title text-black text-start p-0 m-0 w-75 d-flex align-items-center">TripTrip System</h4>
       </div>
   </div>
   <div class="justify-content-end paddingMedia transformMedia d-flex col-md-4 col-4 pe-4">
@@ -39,9 +39,14 @@ $user_id = $_SESSION['admin_id'];
         <span class="fw-bold text-muted" style="color: #000 !important;">Are you sure you want to logout?</span>
       </div>
       <div class="footer-logout w-100 d-flex align-items-end justify-content-end gap-3 pb-3 pe-3 pt-2" style="border-top: solid .5px #0e0e0e4f !important;">
-          <button class="m-0 btn btn-dark" id="logout" class="logout" style="cursor: pointer;">
-            yes
-        </button>
+          <form action="../../authentication/auth.php" method="post">
+            <input type="hidden" name="LogoutAdmin" value="true">
+            <input type="hidden" name="adminID" value="<?= $user_id ?>">
+            <input type="hidden" name="csrf_token" value="<?= $csrf_token; ?>">
+            <button class="m-0 btn btn-dark" class="logout" style="cursor: pointer;">
+                yes
+            </button>
+          </form>
         <button class="m-0 btn btn-primary" type="button" onclick="cancel()">Cancel</button>
       </div>
     </div>

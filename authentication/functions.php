@@ -48,7 +48,7 @@ function render_styles()
 {
 
     $styles = [
-        base_url() . 'assets/css/all.min.css',
+        // base_url() . 'assets/css/all.min.css',
         base_url() . 'assets/css/custom-bs.min.css',
         base_url() . 'assets/css/main.css',
         base_url() . 'assets/css/marco.css',
@@ -80,8 +80,6 @@ function render_scripts()
     $scripts = [
         base_url() . 'assets/js/jquery.min.js',
         base_url() . 'assets/js/plugins/perfect-scrollbar.min.js',
-        base_url() . 'assets/js/smooth-scrollbar.min.js',
-        base_url() . 'assets/js/sweetalert.min.js',
         base_url() . 'assets/js/all.min.js',
         base_url() . 'assets/js/bootstrap.min.js',
         base_url() . 'assets/js/custom-bs.js',

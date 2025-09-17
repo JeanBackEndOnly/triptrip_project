@@ -5,7 +5,7 @@
             <h4 class="card-title text-white mt-1 loginAccess">TripTrip Project</h4>
         </div>
         <div class="card-body  shadow loginBody">
-            <form action="../authentication/auth.php" class="form-floating mt-2" method="post">
+            <form action="../authentication/auth.php" class="form-floating mt-2 p-3" method="post">
                 <input type="hidden" name="csrf_token" value="<?= $csrf_token; ?>">
                 <input type="hidden" name="loginAuth" value="true">
                 <div class="mb-3">

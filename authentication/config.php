@@ -36,6 +36,13 @@ function db_connect()
                 logout_time DATETIME DEFAULT NULL,
                 FOREIGN KEY (admin_id) REFERENCES admin(admin_id) ON DELETE CASCADE
             )",
+            "CREATE TABLE IF NOT EXISTS users_history (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                login_time DATETIME NOT NULL,
+                logout_time DATETIME DEFAULT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+            )",
             "CREATE TABLE IF NOT EXISTS users (
                 user_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 firstname VARCHAR(50) NOT NULL,
@@ -45,15 +52,8 @@ function db_connect()
                 email VARCHAR(100) NOT NULL,
                 username VARCHAR(50) NOT NULL,
                 password VARCHAR(255) NOT NULL,
-                user_role VARCHAR(20) NOT NULL,
+                user_role ENUM('STUDENT', 'PARENT', 'TEACHER'),
                 created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )",
-            "CREATE TABLE IF NOT EXISTS users_history (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT NOT NULL,
-                login_time DATETIME NOT NULL,
-                logout_time DATETIME DEFAULT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
             )",
             
         ];

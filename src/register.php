@@ -1,11 +1,11 @@
 <?php include '../header.php'; ?>
 <main class="login-page p-0 d-flex justify-content-center align-items-center w-100 h-100">
-    <div class="card-header shadow p-0 m-0 rounded-3 col-md-5 col-11 rounded">
-        <div class="card-header  py-2 text-white bg-dark text-center">
+    <div class="card-header shadow p-0 m-0 rounded-3 col-md-5 col-11 rounded rounded-top">
+        <div class="card-header  py-2 text-white bg-dark text-center rounded-top">
             <h4 class="mt-1 text-white">Registration</h4>
         </div>
         <div class="card-body h-auto" >
-            <form class="row g-1" action="../authentication/auth.php" method="post">
+            <form class="row g-1 p-3" action="../authentication/auth.php" method="post">
                 <input type="hidden" name="csrf_token" value="<?= $csrf_token; ?>">
                 <input type="hidden" name="resgiter" value="true">
                 <input type="hidden" name="academicRank" value="STUDENT">
